@@ -16,20 +16,25 @@ class WebGLRenderer extends Renderer {
     //---------------------------------------
     constructor(){
         super();
+
+        // setup gl context
         this.gl = this.canvas.getContext("webgl2");
-          
+        
         this.width = this.canvas.width;
         this.height = this.canvas.height;
 
+        // setup shaders
         this.shader = new Shader(this.gl, vsSource, fsSource);
         this.skyShader = new Shader(this.gl, skyVsSource, skyFsSource);
 
+        // setup datas
         this.vao = initVAO(this.gl);
         this.texture = initTexture(this.gl, {
             checker_gray : "src\\images\\checker2k.png",
             checker_colored : "src\\images\\checker2kC.png"
         });
         
+        // setup camera
         this.camera = new Camera(5, 4, 7, 0, 1, 0, 0, 0, 45);
         this.camera.lookAt(0, 0, 0);
     }
