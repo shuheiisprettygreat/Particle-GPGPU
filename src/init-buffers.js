@@ -1,7 +1,8 @@
 function initVAO(gl){
     const cube = initCubeVAO(gl);
     const plane = initPlaneVAO(gl);
-    return {cube: cube, plane: plane};
+    const quad = initQuadVAO(gl);
+    return {cube: cube, plane: plane, quad: quad};
 }
 
 function initTexture(gl, pathHash){
@@ -122,6 +123,36 @@ function initPlaneVAO(gl){
         gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 8*4, 3*4);
         gl.enableVertexAttribArray(2);
         gl.vertexAttribPointer(2, 2, gl.FLOAT, false, 8*4, 6*4);
+    
+    gl.bindVertexArray(null);
+
+    return vao;
+}
+
+
+function initQuadVAO(gl){
+    const arr = [
+        //vertex(2), texCoord(2)
+        -1,  1,  0, 1,
+        -1, -1,  0, 0,
+         1, -1,  1, 0,
+
+        -1,  1,  0, 1,
+         1, -1,  1, 0,
+         1,  1,  1, 1     
+    ];
+
+    const vbo = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(arr), gl.STATIC_DRAW);
+
+    const vao = gl.createVertexArray();
+    gl.bindVertexArray(vao);
+
+        gl.enableVertexAttribArray(0);
+        gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 4*4, 0);
+        gl.enableVertexAttribArray(1);
+        gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 4*4, 2*4);
     
     gl.bindVertexArray(null);
 
