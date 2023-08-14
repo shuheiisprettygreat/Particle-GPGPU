@@ -25,6 +25,7 @@ class Renderer {
 
         let lastTimeStamp = -1;
         this.frameCallback = (timestamp) => {
+            this.timestamp = timestamp;
             this.timeDelta = lastTimeStamp == -1 ? 0 : timestamp - lastTimeStamp;
             lastTimeStamp = timestamp;
             

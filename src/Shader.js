@@ -35,6 +35,11 @@ class Shader{
         gl.uniform1i(gl.getUniformLocation(this.id, name), value);
     }
 
+    setFloat(name, value){
+        let gl = this.gl;
+        gl.uniform1f(gl.getUniformLocation(this.id, name), value);
+    }
+
     setVec2(name, x, y) {
         let gl = this.gl;
         gl.uniform2f(gl.getUniformLocation(this.id, name), x, y);
