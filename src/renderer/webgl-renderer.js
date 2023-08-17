@@ -95,7 +95,6 @@ class WebGLRenderer extends Renderer {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
         gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.testTexture, 0);
 
-        const ext = gl.getExtension("WEBGL_depth_texture");
         this.depthMap = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, this.depthMap);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.DEPTH_COMPONENT32F, 2048, 2048, 0, gl.DEPTH_COMPONENT, gl.FLOAT, null);
@@ -104,8 +103,8 @@ class WebGLRenderer extends Renderer {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.TEXTURE_2D, this.depthMap, 0);
-        // gl.drawBuffers([gl.NONE]);
-        // gl.readBuffer(gl.NONE);
+        gl.drawBuffers([gl.NONE]);
+        gl.readBuffer(gl.NONE);
         
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
@@ -226,7 +225,7 @@ class WebGLRenderer extends Renderer {
         // this.renderQuad();
         
         // render debug plane
-        gl.viewport(0, 0, this.width*0.3, this.width*0.3);
+        gl.viewport(0, 0, this.width*0.2, this.width*0.2);
         this.debugShader.use();
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, this.depthMap);

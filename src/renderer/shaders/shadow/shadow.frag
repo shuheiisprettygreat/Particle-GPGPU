@@ -44,8 +44,8 @@ void main() {
     spec = pow(spec, 5100.0);
 
     float shadow = calcShadow();
-    shadow *= 0.8;
-    FragColor.xyz = (1.0-shadow) * FragColor.xyz * diff + spec*(1,0.9,0.9);
+    FragColor.xyz = (1.0-shadow*0.8) * FragColor.xyz * diff;
+    FragColor.xyz += spec * vec3(1,1,1) * (1.0-shadow);
     // FragColor.xyz = vec3(spec);
 
 }
